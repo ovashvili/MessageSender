@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
 
-namespace MessageSender.Application.Sms.Models;
+namespace MessageSender.Service.Sms.Models;
 
 public class SendSmsDto
 {
