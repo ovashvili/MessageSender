@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Z/fuvsbwcflQMKaLzcl92wRAeJpA8PoTMxkuQaUjUrg0NzYzdAuKfQcjKQMx0xYXveEnajyWrnETKvqR+QJJAw==",
+  "dgSpecHash": "GsVkIRCBVqWXelE58B3fnjkojISQIt+qV5tWLOJU8XYoM+lA/vVjhJcIGSOA98PIOuRqDMT8rxt+rvhBskgYTw==",
   "success": true,
   "projectFilePath": "/Users/ovashnik/RiderProjects/MessageSender/MessageSender.Api/MessageSender.Api.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/ovashnik/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
+    "/Users/ovashnik/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/ovashnik/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/ovashnik/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
