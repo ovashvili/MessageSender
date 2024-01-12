@@ -4,7 +4,7 @@ public enum StatusCodes : short
 {
     Success = 200,
     
-    NotFound = 404,
+    ProviderNotFound = 404,
         
-    InternalServerError = 500
+    GenericFailedError = 500
 }
