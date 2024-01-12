@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using MessageSender.Application.Sms.Models;
 using MessageSender.Application.Sms.Services;
 using MessageSender.MagtiIntegration.Extensions;
+using MessageSender.PelekaIntegration.Extensions;
 using MessageSender.Persistence.Extensions;
 using MessageSender.SilknetIntegration.Extensions;
 
@@ -29,6 +30,7 @@ builder.Services.AddScoped<ISmsService, SmsService>();
 builder.AddRepositoryServices();
 builder.AddMagtiIntegration();
 builder.AddSilknetIntegration();
+builder.AddPelekaIntegration();
 
 var app = builder.Build();
 

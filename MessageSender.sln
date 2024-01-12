@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2A8E25F-DB99-4E77-89BD-50E147430E74}"
 EndProject
@@ -10,19 +10,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3CA39B87-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{ADB255F7-EE98-4115-BCE1-D2099D72BCB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Api", "MessageSender.Api\MessageSender.Api.csproj", "{61D893A1-BC7C-4B25-A945-595BC4C1E04C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Api", "src\Api\MessageSender.Api\MessageSender.Api.csproj", "{61D893A1-BC7C-4B25-A945-595BC4C1E04C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Application", "MessageSender.Application\MessageSender.Application.csproj", "{9F450005-6EAE-4979-AEF2-F8168EA4E24B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Application", "src\Application\MessageSender.Application\MessageSender.Application.csproj", "{9F450005-6EAE-4979-AEF2-F8168EA4E24B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Domain", "MessageSender.Domain\MessageSender.Domain.csproj", "{67AC4EC8-C702-45E4-9777-0F645D92E781}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Domain", "src\Core\MessageSender.Domain\MessageSender.Domain.csproj", "{67AC4EC8-C702-45E4-9777-0F645D92E781}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Persistence", "MessageSender.Persistence\MessageSender.Persistence.csproj", "{81044E1E-2811-4A19-87E6-7EE9FA1F427D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Persistence", "src\Infrastructure\MessageSender.Persistence\MessageSender.Persistence.csproj", "{81044E1E-2811-4A19-87E6-7EE9FA1F427D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.MagtiIntegration", "MessageSender.MagtiIntegration\MessageSender.MagtiIntegration.csproj", "{98E8034D-E4ED-471B-A274-916E18EB6C50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.MagtiIntegration", "src\Infrastructure\MessageSender.MagtiIntegration\MessageSender.MagtiIntegration.csproj", "{98E8034D-E4ED-471B-A274-916E18EB6C50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.IntegrationsCommon", "MessageSender.IntegrationsCommon\MessageSender.IntegrationsCommon.csproj", "{A132A180-C424-42A0-8A0D-0373A86C642A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.IntegrationsCommon", "src\Infrastructure\MessageSender.IntegrationsCommon\MessageSender.IntegrationsCommon.csproj", "{A132A180-C424-42A0-8A0D-0373A86C642A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.SilknetIntegration", "MessageSender.SilknetIntegration\MessageSender.SilknetIntegration.csproj", "{BB0E06B2-7E56-4522-B082-AFC02AE06590}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.SilknetIntegration", "src\Infrastructure\MessageSender.SilknetIntegration\MessageSender.SilknetIntegration.csproj", "{BB0E06B2-7E56-4522-B082-AFC02AE06590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.PelekaIntegration", "src\Infrastructure\MessageSender.PelekaIntegration\MessageSender.PelekaIntegration.csproj", "{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{BB0E06B2-7E56-4522-B082-AFC02AE06590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB0E06B2-7E56-4522-B082-AFC02AE06590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB0E06B2-7E56-4522-B082-AFC02AE06590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{102245F8-62A1-4661-9EAB-5F1F3D1FB0EB} = {E2A8E25F-DB99-4E77-89BD-50E147430E74}
@@ -71,5 +77,6 @@ Global
 		{98E8034D-E4ED-471B-A274-916E18EB6C50} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 		{A132A180-C424-42A0-8A0D-0373A86C642A} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 		{BB0E06B2-7E56-4522-B082-AFC02AE06590} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
+		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 	EndGlobalSection
 EndGlobal
