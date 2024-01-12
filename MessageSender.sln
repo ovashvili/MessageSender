@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Domain", "Mes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.Persistence", "MessageSender.Persistence\MessageSender.Persistence.csproj", "{81044E1E-2811-4A19-87E6-7EE9FA1F427D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.MagtiIntegration", "MessageSender.MagtiIntegration\MessageSender.MagtiIntegration.csproj", "{98E8034D-E4ED-471B-A274-916E18EB6C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.IntegrationsCommon", "MessageSender.IntegrationsCommon\MessageSender.IntegrationsCommon.csproj", "{A132A180-C424-42A0-8A0D-0373A86C642A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{81044E1E-2811-4A19-87E6-7EE9FA1F427D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81044E1E-2811-4A19-87E6-7EE9FA1F427D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81044E1E-2811-4A19-87E6-7EE9FA1F427D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E8034D-E4ED-471B-A274-916E18EB6C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E8034D-E4ED-471B-A274-916E18EB6C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E8034D-E4ED-471B-A274-916E18EB6C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E8034D-E4ED-471B-A274-916E18EB6C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A132A180-C424-42A0-8A0D-0373A86C642A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A132A180-C424-42A0-8A0D-0373A86C642A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A132A180-C424-42A0-8A0D-0373A86C642A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A132A180-C424-42A0-8A0D-0373A86C642A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{102245F8-62A1-4661-9EAB-5F1F3D1FB0EB} = {E2A8E25F-DB99-4E77-89BD-50E147430E74}
@@ -50,5 +62,7 @@ Global
 		{9F450005-6EAE-4979-AEF2-F8168EA4E24B} = {AD1641DA-0A49-41F6-A686-B2C80BB4F749}
 		{67AC4EC8-C702-45E4-9777-0F645D92E781} = {3CA39B87-3457-47F8-9501-323E00D7CE40}
 		{81044E1E-2811-4A19-87E6-7EE9FA1F427D} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
+		{98E8034D-E4ED-471B-A274-916E18EB6C50} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
+		{A132A180-C424-42A0-8A0D-0373A86C642A} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 	EndGlobalSection
 EndGlobal
