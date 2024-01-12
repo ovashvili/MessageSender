@@ -6,6 +6,7 @@ using MessageSender.Application.Sms.Models;
 using MessageSender.Application.Sms.Services;
 using MessageSender.MagtiIntegration.Extensions;
 using MessageSender.Persistence.Extensions;
+using MessageSender.SilknetIntegration.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddScoped<ISmsService, SmsService>();
 
 builder.AddRepositoryServices();
 builder.AddMagtiIntegration();
+builder.AddSilknetIntegration();
 
 var app = builder.Build();
 

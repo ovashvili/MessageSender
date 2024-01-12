@@ -411,6 +411,24 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "MessageSender.SilknetIntegration/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MessageSender.Domain": "1.0.0",
+          "MessageSender.IntegrationsCommon": "1.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MessageSender.SilknetIntegration.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MessageSender.SilknetIntegration.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -983,13 +1001,19 @@
       "type": "project",
       "path": "../MessageSender.Persistence/MessageSender.Persistence.csproj",
       "msbuildProject": "../MessageSender.Persistence/MessageSender.Persistence.csproj"
+    },
+    "MessageSender.SilknetIntegration/1.0.0": {
+      "type": "project",
+      "path": "../MessageSender.SilknetIntegration/MessageSender.SilknetIntegration.csproj",
+      "msbuildProject": "../MessageSender.SilknetIntegration/MessageSender.SilknetIntegration.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "MessageSender.Application >= 1.0.0",
       "MessageSender.Domain >= 1.0.0",
-      "MessageSender.MagtiIntegration >= 1.0.0"
+      "MessageSender.MagtiIntegration >= 1.0.0",
+      "MessageSender.SilknetIntegration >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1026,6 +1050,9 @@
             },
             "/Users/ovashnik/RiderProjects/MessageSender/MessageSender.MagtiIntegration/MessageSender.MagtiIntegration.csproj": {
               "projectPath": "/Users/ovashnik/RiderProjects/MessageSender/MessageSender.MagtiIntegration/MessageSender.MagtiIntegration.csproj"
+            },
+            "/Users/ovashnik/RiderProjects/MessageSender/MessageSender.SilknetIntegration/MessageSender.SilknetIntegration.csproj": {
+              "projectPath": "/Users/ovashnik/RiderProjects/MessageSender/MessageSender.SilknetIntegration/MessageSender.SilknetIntegration.csproj"
             }
           }
         }
