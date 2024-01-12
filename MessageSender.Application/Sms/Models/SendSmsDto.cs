@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
 
-namespace MessageSender.Service.Sms.Models;
+namespace MessageSender.Application.Sms.Models;
 
 public class SendSmsDto
 {
@@ -17,9 +17,6 @@ public class SendSmsDto
 
 public class SendSmsRequestValidator : AbstractValidator<SendSmsDto>
 {
-    /// <summary>
-    /// Validator constructor
-    /// </summary>
     public SendSmsRequestValidator()
     {
         RuleFor(r => r.To)

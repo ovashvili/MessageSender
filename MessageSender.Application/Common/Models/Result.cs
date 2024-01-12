@@ -1,6 +1,6 @@
-using MessageSender.Service.Common.Enums;
+using MessageSender.Application.Common.Enums;
 
-namespace MessageSender.Service.Common.Models;
+namespace MessageSender.Application.Common.Models;
 
 public class Result<TData>(StatusCodes statusCode, string? message = null, TData? data = default)
 {

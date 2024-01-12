@@ -1,4 +1,4 @@
-namespace MessageSender.Service.Common.Enums;
+namespace MessageSender.Application.Common.Enums;
 
 public enum StatusCodes : short
 {
@@ -6,5 +6,5 @@ public enum StatusCodes : short
     
     NotFound = 404,
         
-    GenericFailedError = 500
+    InternalServerError = 500
 }

@@ -9,7 +9,6 @@
     <ItemGroup>
       <ProjectReference Include="..\MessageSender.Application\MessageSender.Application.csproj" />
       <ProjectReference Include="..\MessageSender.Domain\MessageSender.Domain.csproj" />
-      <ProjectReference Include="..\MessageSender.Service\MessageSender.Service.csproj" />
     </ItemGroup>
 
     <ItemGroup>

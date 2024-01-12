@@ -1,7 +1,7 @@
-using MessageSender.Service.Common.Models;
-using MessageSender.Service.Sms.Models;
+using MessageSender.Application.Common.Models;
+using MessageSender.Application.Sms.Models;
 
-namespace MessageSender.Service.Sms.Services;
+namespace MessageSender.Application.Sms.Services;
 
 public interface ISmsService
 {
