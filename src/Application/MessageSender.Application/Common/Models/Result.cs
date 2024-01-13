@@ -2,9 +2,16 @@ using MessageSender.Application.Common.Enums;
 
 namespace MessageSender.Application.Common.Models;
 
-public class Result<TData>(StatusCodes statusCode, string? message = null, TData? data = default)
+public class Result<TData>
 {
-    public StatusCodes StatusCode { get; set; } = statusCode;
-    public string? Message { get; set; } = message;
-    public TData? Data { get; set; } = data;
+    public Result(StatusCodes statusCode, string? message = null, TData? data = default)
+    {
+        StatusCode = statusCode;
+        Message = message;
+        Data = data;
+    }
+
+    public StatusCodes StatusCode { get; set; }
+    public string? Message { get; set; }
+    public TData? Data { get; set; }
 }
