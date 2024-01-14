@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using MessageSender.Api.Extensions;
 using MessageSender.Api.Filters;
+using MessageSender.Application.Common.Middlewares;
 using MessageSender.Application.Sms.Extensions;
 using MessageSender.Application.Sms.Models;
 using MessageSender.MagtiIntegration.Extensions;
@@ -49,6 +50,8 @@ try
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), c => 
                     c.MigrationsAssembly("MessageSender.Persistence")));
 
+    builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
     builder.Services.AddFluentValidationAutoValidation();
     builder.Services.AddValidatorsFromAssemblyContaining<SendSmsRequestValidator>();
     builder.Services.AddHttpClient();
@@ -63,13 +66,16 @@ try
 
     var app = builder.Build();
     var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
+    
+    app.UseCustomExceptionMiddleware();
+    
     app.UseRouting();
 
     app.MapControllers();
 
     if (app.Environment.IsDevelopment())
     {
+        app.UseDeveloperExceptionPage();
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {

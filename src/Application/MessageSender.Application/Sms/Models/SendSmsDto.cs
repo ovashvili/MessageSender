@@ -11,7 +11,7 @@ public class SendSmsDto
     [JsonPropertyName("content")]
     public string Content { get; set; } = null!;
     
-    [JsonPropertyName("code")]
+    [JsonPropertyName("countryCode")]
     public string CountryCode { get; set; } = null!;
     
     [JsonPropertyName("provider")]
