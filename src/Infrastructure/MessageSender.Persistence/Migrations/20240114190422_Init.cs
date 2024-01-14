@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MessageSender.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -150,6 +152,45 @@ namespace MessageSender.Persistence.Migrations
                         principalTable: "Sms",
                         principalColumn: "SmsId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Client",
+                columns: new[] { "ClientId", "Config", "IsActive", "Secret" },
+                values: new object[] { new Guid("40f734dd-5750-4e08-964f-bb82e77ded48"), "{\"SmsFrom\": \"OTP\", \"field2\": \"value2\"}", true, new Guid("33ed5b33-64c5-4879-a9bb-eb1238e6e852") });
+
+            migrationBuilder.InsertData(
+                table: "Country",
+                columns: new[] { "Alpha2Code", "DialCode", "IsActive" },
+                values: new object[,]
+                {
+                    { "AM", (short)374, true },
+                    { "GE", (short)995, true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GreyList",
+                columns: new[] { "ContactIdentifier", "IsActive", "Status", "StatusNote" },
+                values: new object[] { "555444333", true, "Black", "Blocked" });
+
+            migrationBuilder.InsertData(
+                table: "Provider",
+                columns: new[] { "ProviderId", "Config", "IsActive", "IsGlobal", "Name", "Priority" },
+                values: new object[,]
+                {
+                    { 1, "{\"provider-specific-field\": \"value1\"}", true, false, "Magti", (short)1 },
+                    { 2, "{\"provider-specific-field\": \"value2\"}", true, false, "Silknet", (short)2 },
+                    { 3, "{\"provider-specific-field\": \"value3\"}", true, false, "Peleka", (short)3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CountryProvider",
+                columns: new[] { "CountryProviderId", "Alpha2Code", "IsActive", "Priority", "ProviderId" },
+                values: new object[,]
+                {
+                    { 1, "GE", true, (short)1, 1 },
+                    { 2, "GE", true, (short)2, 2 },
+                    { 3, "AM", true, (short)1, 3 }
                 });
 
             migrationBuilder.CreateIndex(

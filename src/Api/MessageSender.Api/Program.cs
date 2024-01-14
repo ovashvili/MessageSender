@@ -48,7 +48,7 @@ try
 
     builder.Services.AddDbContext<AppDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), c => 
-                    c.MigrationsAssembly(nameof(MessageSender.Persistence))));
+                    c.MigrationsAssembly("MessageSender.Persistence")));
 
     builder.Services.AddFluentValidationAutoValidation();
     builder.Services.AddValidatorsFromAssemblyContaining<SendSmsRequestValidator>();

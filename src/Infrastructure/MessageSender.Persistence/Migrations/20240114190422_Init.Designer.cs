@@ -4,6 +4,7 @@ using MessageSender.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MessageSender.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240114190422_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +49,15 @@ namespace MessageSender.Persistence.Migrations
                         .HasName("PK_Client");
 
                     b.ToTable("Client", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = new Guid("40f734dd-5750-4e08-964f-bb82e77ded48"),
+                            Config = "{\"SmsFrom\": \"OTP\", \"field2\": \"value2\"}",
+                            IsActive = true,
+                            Secret = new Guid("33ed5b33-64c5-4879-a9bb-eb1238e6e852")
+                        });
                 });
 
             modelBuilder.Entity("MessageSender.Domain.Entities.Country", b =>
@@ -69,6 +81,20 @@ namespace MessageSender.Persistence.Migrations
                         .HasDatabaseName("IX_Country_DialCode");
 
                     b.ToTable("Country", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Alpha2Code = "GE",
+                            DialCode = (short)995,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Alpha2Code = "AM",
+                            DialCode = (short)374,
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("MessageSender.Domain.Entities.CountryProvider", b =>
@@ -109,6 +135,32 @@ namespace MessageSender.Persistence.Migrations
                         .HasDatabaseName("IX_CountryProvider_ProviderId");
 
                     b.ToTable("CountryProvider", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CountryProviderId = 1,
+                            Alpha2Code = "GE",
+                            IsActive = true,
+                            Priority = (short)1,
+                            ProviderId = 1
+                        },
+                        new
+                        {
+                            CountryProviderId = 2,
+                            Alpha2Code = "GE",
+                            IsActive = true,
+                            Priority = (short)2,
+                            ProviderId = 2
+                        },
+                        new
+                        {
+                            CountryProviderId = 3,
+                            Alpha2Code = "AM",
+                            IsActive = true,
+                            Priority = (short)1,
+                            ProviderId = 3
+                        });
                 });
 
             modelBuilder.Entity("MessageSender.Domain.Entities.GreyList", b =>
@@ -148,6 +200,17 @@ namespace MessageSender.Persistence.Migrations
                         .HasName("PK_GreyList");
 
                     b.ToTable("GreyList", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ContactIdentifier = "555444333",
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Black",
+                            StatusNote = "Blocked"
+                        });
                 });
 
             modelBuilder.Entity("MessageSender.Domain.Entities.MessageDelivery", b =>
@@ -246,6 +309,35 @@ namespace MessageSender.Persistence.Migrations
                         .HasDatabaseName("IX_Provider_Name_UQ");
 
                     b.ToTable("Provider", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProviderId = 1,
+                            Config = "{\"provider-specific-field\": \"value1\"}",
+                            IsActive = true,
+                            IsGlobal = false,
+                            Name = "Magti",
+                            Priority = (short)1
+                        },
+                        new
+                        {
+                            ProviderId = 2,
+                            Config = "{\"provider-specific-field\": \"value2\"}",
+                            IsActive = true,
+                            IsGlobal = false,
+                            Name = "Silknet",
+                            Priority = (short)2
+                        },
+                        new
+                        {
+                            ProviderId = 3,
+                            Config = "{\"provider-specific-field\": \"value3\"}",
+                            IsActive = true,
+                            IsGlobal = false,
+                            Name = "Peleka",
+                            Priority = (short)3
+                        });
                 });
 
             modelBuilder.Entity("MessageSender.Domain.Entities.Sms", b =>

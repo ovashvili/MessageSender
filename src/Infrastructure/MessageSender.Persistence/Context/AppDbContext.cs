@@ -1,3 +1,5 @@
+using MessageSender.Persistence.Extensions;
+
 namespace MessageSender.Persistence.Context;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
@@ -14,6 +16,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         base.OnModelCreating(builder);
 
+        builder.Seed();
+            
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }
