@@ -10,9 +10,8 @@ public static class SmsServiceExtensions
 {
     public static WebApplicationBuilder AddSmsServices(this WebApplicationBuilder builder)
     {
-        // builder.Services.AddTransient<IFireForgetSmsRepositoryHandler, FireForgetSmsRepositoryHandler>();
+        builder.Services.AddTransient<IFireForgetSmsRepositoryHandler, FireForgetSmsRepositoryHandler>();
         builder.Services.AddScoped<ISmsService, SmsService>();
-        // builder.Services.AddSingleton<IPhoneNumberHelperService, PhoneNumberHelperService>();
         builder.Services.AddScoped<ISmsIntegrationFactory, SmsIntegrationFactory>();
         builder.Services.AddScoped<ISmsServiceRepositoryFacade, SmsServiceRepositoryFacade>();
         

@@ -12,14 +12,17 @@ public class SmsService : ISmsService
 {
     private readonly ISmsServiceRepositoryFacade _smsServiceRepositoryFacade;
     private readonly ISmsIntegrationFactory _smsIntegrationFactory;
+    private readonly IFireForgetSmsRepositoryHandler _fireForgetSmsRepositoryHandler;
     private readonly ILogger<SmsService> _logger;
 
     public SmsService(ISmsServiceRepositoryFacade smsServiceRepositoryFacade,
         ISmsIntegrationFactory smsIntegrationFactory,
+        IFireForgetSmsRepositoryHandler fireForgetSmsRepositoryHandler,
         ILogger<SmsService> logger)
     {
         _smsServiceRepositoryFacade = smsServiceRepositoryFacade;
         _smsIntegrationFactory = smsIntegrationFactory;
+        _fireForgetSmsRepositoryHandler = fireForgetSmsRepositoryHandler;
         _logger = logger;
     }
 
@@ -57,7 +60,7 @@ public class SmsService : ISmsService
     {
         var smsId = await _smsServiceRepositoryFacade.InsertSmsAsync(clientId, number, cancellationToken);
 
-        // FireForgetSmsRepositoryHandler.Execute(smsId, content, cancellationToken);
+        _fireForgetSmsRepositoryHandler.Execute(smsId, content, cancellationToken);
 
         var clientInfo = await GetClientInfo(clientId, cancellationToken);
 

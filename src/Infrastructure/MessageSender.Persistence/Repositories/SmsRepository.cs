@@ -19,7 +19,7 @@ public class SmsRepository(AppDbContext dbContext) : ISmsRepository
         return sms.SmsId;
     }
 
-    public async Task UpdateSmsContentAsync(int smsId, string content, CancellationToken cancellationToken = default)
+    public async Task UpdateSmsContentAsync(long smsId, string content, CancellationToken cancellationToken = default)
     {
         var sms = await dbContext.Smses
             .FirstOrDefaultAsync(s => s.SmsId == smsId, cancellationToken);
