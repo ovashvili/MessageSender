@@ -1,34 +1,29 @@
 namespace MessageSender.Persistence.Configurations;
 
-public class CountyConfiguration : IEntityTypeConfiguration<Country>
+public class CountryConfiguration : IEntityTypeConfiguration<Country>
 {
     public void Configure(EntityTypeBuilder<Country> builder)
     {
-        builder.ToTable("country");
+        builder.ToTable("Country");
 
         builder.HasKey(c => c.Alpha2Code)
-            .HasName("country_pk");
+            .HasName("PK_Country");
 
         builder.HasIndex(c => c.DialCode)
-            .HasDatabaseName("country_dial_code_idx");
+            .HasDatabaseName("IX_Country_DialCode");
 
         builder.Property(c => c.Alpha2Code)
-            .HasColumnName("alpha_2_code")
-            .HasColumnType("varchar(2)")
+            .HasColumnName("Alpha2Code")
+            .HasColumnType("char(2)")
             .IsRequired();
 
         builder.Property(c => c.DialCode)
-            .HasColumnName("dial_code")
+            .HasColumnName("DialCode")
             .HasColumnType("smallint")
             .IsRequired();
 
-        builder.Property(c => c.AreaCode)
-            .HasColumnName("area_code")
-            .HasColumnType("varchar(8)")
-            .IsRequired();
-
         builder.Property(c => c.IsActive)
-            .HasColumnName("is_active")
+            .HasColumnName("IsActive")
             .IsRequired();
     }
 }

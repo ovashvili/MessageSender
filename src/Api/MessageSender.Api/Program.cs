@@ -3,63 +3,91 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using MessageSender.Api.Extensions;
 using MessageSender.Api.Filters;
+using MessageSender.Application.Sms.Extensions;
 using MessageSender.Application.Sms.Models;
-using MessageSender.Application.Sms.Services;
 using MessageSender.MagtiIntegration.Extensions;
 using MessageSender.PelekaIntegration.Extensions;
+using MessageSender.Persistence.Context;
 using MessageSender.Persistence.Extensions;
 using MessageSender.SilknetIntegration.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 
-var builder = WebApplication.CreateBuilder(args);
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
-builder.Services
-    .AddControllers(options => options.Filters.Add<ApiKeyAuthFilter>())
-    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(
-        new JsonStringEnumConverter()));
-
-builder.Services.AddApiVersioning(options =>
+try
 {
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
-});
+    var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddVersionedApiExplorer(options =>
-{
-    options.GroupNameFormat = "'v'VV";
-    options.SubstituteApiVersionInUrl = true;
-});
+    builder.Services
+        .AddControllers(options => options.Filters.Add<ApiKeyAuthFilter>())
+        .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()));
 
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<SendSmsRequestValidator>();
-builder.Services.AddHttpClient();
+    builder.Logging.ClearProviders();
 
-builder.Services.AddScoped<ISmsService, SmsService>();
-
-builder.AddRepositoryServices();
-builder.AddMagtiIntegration();
-builder.AddSilknetIntegration();
-builder.AddPelekaIntegration();
-builder.AddSwaggerWithApiKeySecurity();
-
-var app = builder.Build();
-var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
-app.UseRouting();
-app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+    
+    builder.Host.UseNLog();
+    
+    builder.Services.AddApiVersioning(options =>
     {
-        foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
-        {
-            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-        }
+        options.DefaultApiVersion = new ApiVersion(1, 0);
+        options.AssumeDefaultVersionWhenUnspecified = true;
+        options.ReportApiVersions = true;
     });
-}
 
-app.Run();
+    builder.Services.AddVersionedApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'VV";
+        options.SubstituteApiVersionInUrl = true;
+    });
+
+    builder.Services.AddDbContext<AppDbContext>(options => 
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), c => 
+                    c.MigrationsAssembly(nameof(MessageSender.Persistence))));
+
+    builder.Services.AddFluentValidationAutoValidation();
+    builder.Services.AddValidatorsFromAssemblyContaining<SendSmsRequestValidator>();
+    builder.Services.AddHttpClient();
+    builder.AddSmsServices();
+    builder.AddRepositoryServices();
+    builder.AddMagtiIntegration();
+    builder.AddSilknetIntegration();
+    builder.AddPelekaIntegration();
+    builder.AddSwaggerWithApiKeySecurity();
+
+    var app = builder.Build();
+    var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    app.UseRouting();
+
+    app.MapControllers();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
+        {
+            foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+            {
+                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+            }
+        });
+    }
+
+    app.Run();
+
+}
+catch (Exception ex)
+{
+    logger.Fatal(ex, "Application failed");
+    throw;
+}
+finally
+{
+    LogManager.Shutdown();
+}

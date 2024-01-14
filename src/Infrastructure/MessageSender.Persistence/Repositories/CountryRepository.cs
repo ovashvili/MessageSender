@@ -1,16 +1,22 @@
 using MessageSender.Domain.Contracts;
+using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
-public class CountryRepository : ICountryRepository
+public class CountryRepository(AppDbContext dbContext) : ICountryRepository
 {
-    public Task<IEnumerable<Country>> GetCountriesAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Country>> GetCountriesAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.Countries
+            .AsNoTracking()
+            .Where(c => c.IsActive)
+            .ToListAsync(cancellationToken);
     }
 
-    public Task<Country?> GetCountryAsync(string countryCode, CancellationToken cancellationToken = default)
+    public async Task<Country?> GetCountryAsync(string countryCode, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.Countries
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Alpha2Code == countryCode && c.IsActive, cancellationToken);
     }
 }

@@ -2,7 +2,7 @@ using MessageSender.Application.Common.Models;
 using MessageSender.Application.Sms.Models;
 using MessageSender.Domain.Enums;
 
-namespace MessageSender.Application.Sms.Services;
+namespace MessageSender.Application.Sms.Contracts;
 
 public interface ISmsService
 {

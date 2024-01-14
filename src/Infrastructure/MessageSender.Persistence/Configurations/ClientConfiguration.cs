@@ -4,26 +4,26 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> builder)
     {
-        builder.ToTable("client");
+        builder.ToTable("Client");
         builder.HasKey(c => c.ClientId)
-            .HasName("client_pk");
+            .HasName("PK_Client");
 
         builder.Property(c => c.ClientId)
-            . HasColumnName("client_id")
-            .HasColumnType("CHAR(36)");
-
+            .HasColumnName("ClientId")
+            .HasColumnType("uniqueidentifier"); 
+        
         builder.Property(c => c.Config)
-            .HasColumnName("config")
-            .HasColumnType("json")
+            .HasColumnName("Config")
+            .HasColumnType("nvarchar(2000)")
             .IsRequired();
-
+            
         builder.Property(c => c.Secret)
-            .HasColumnName("secret")
-            .HasColumnType("CHAR(36)")
+            .HasColumnName("Secret")
+            .HasColumnType("uniqueidentifier")
             .IsRequired();
 
         builder.Property(c => c.IsActive)
-            .HasColumnName("is_active")
+            .HasColumnName("IsActive")
             .IsRequired();
     }
 }

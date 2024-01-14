@@ -1,16 +1,21 @@
 using MessageSender.Domain.Contracts;
+using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
-public class GreyListRepository : IGreyListRepository
+public class GreyListRepository(AppDbContext dbContext) : IGreyListRepository
 {
-    public Task<IEnumerable<GreyList>> GetContactsAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<GreyList>> GetContactsAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.GreyList
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
     }
 
-    public Task<GreyList?> GetContactAsync(string contactIdentifier, CancellationToken cancellationToken = default)
+    public async Task<GreyList?> GetContactAsync(string contactIdentifier, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.GreyList
+            .AsNoTracking()
+            .FirstOrDefaultAsync(g => g.ContactIdentifier == contactIdentifier, cancellationToken);
     }
 }

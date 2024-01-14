@@ -1,44 +1,41 @@
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 namespace MessageSender.Persistence.Configurations;
 
 public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
 {
     public void Configure(EntityTypeBuilder<Provider> builder)
     {
-        builder.ToTable("provider");
+        builder.ToTable("Provider");
         builder.HasKey(p => p.ProviderId)
-            .HasName("provider_pk");
+            .HasName("PK_Provider");
 
         builder.HasIndex(p => p.Name)
             .IsUnique()
-            .HasDatabaseName("provider_provider_name_uq");
+            .HasDatabaseName("IX_Provider_Name_UQ");
 
         builder.Property(p => p.ProviderId)
-            .HasColumnName("provider_id");
+            .HasColumnName("ProviderId");
 
         builder.Property(p => p.Name)
-            .HasColumnName("name")
+            .HasColumnName("Name")
             .HasColumnType("varchar(64)")
             .IsRequired();
 
         builder.Property(p => p.Config)
-            .HasColumnName("config")
-            .HasColumnType("json")
-            .IsRequired();
-
+            .HasColumnName("Config")
+            .HasColumnType("nvarchar(2000)"); 
+        
         builder.Property(p => p.Priority)
-            .HasColumnName("priority")
+            .HasColumnName("Priority")
             .HasColumnType("SMALLINT")
             .HasDefaultValueSql(short.MaxValue.ToString())
             .IsRequired();
 
         builder.Property(p => p.IsGlobal)
-            .HasColumnName("is_global")
+            .HasColumnName("IsGlobal")
             .IsRequired();
 
         builder.Property(p => p.IsActive)
-            .HasColumnName("is_active")
+            .HasColumnName("IsActive")
             .IsRequired();
     }
 }

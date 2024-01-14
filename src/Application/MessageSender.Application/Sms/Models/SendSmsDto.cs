@@ -10,7 +10,10 @@ public class SendSmsDto
 
     [JsonPropertyName("content")]
     public string Content { get; set; } = null!;
-
+    
+    [JsonPropertyName("code")]
+    public string CountryCode { get; set; } = null!;
+    
     [JsonPropertyName("provider")]
     public string? Provider { get; set; }
 }

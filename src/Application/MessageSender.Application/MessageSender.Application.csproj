@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Core\MessageSender.Domain\MessageSender.Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\MessageSender.IntegrationsCommon\MessageSender.IntegrationsCommon.csproj" />
       <ProjectReference Include="..\..\Infrastructure\MessageSender.Persistence\MessageSender.Persistence.csproj" />
     </ItemGroup>
 

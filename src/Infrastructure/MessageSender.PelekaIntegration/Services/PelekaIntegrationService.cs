@@ -42,9 +42,9 @@ public class PelekaIntegrationService : ISmsIntegrationService
             // var deserializedContent = JsonSerializer.Deserialize<PelekaResponse>(responseContent);
 
             if (_logger.IsEnabled(LogLevel.Information))
-                _logger.LogInformation("Sending sms...");
+                _logger.LogInformation("Sending sms via Peleka...");
             
-            return SmsProviderResult.Success("530");
+            return SmsProviderResult.Success("3");
         }
         catch (Exception ex)
         {

@@ -4,38 +4,39 @@ public class SmsConfiguration : IEntityTypeConfiguration<Sms>
 {
     public void Configure(EntityTypeBuilder<Sms> builder)
     {
-        builder.ToTable("sms");
+        builder.ToTable("Sms");
         builder.HasKey(s => s.SmsId)
-            .HasName("sms_pk");
+            .HasName("PK_Sms");
 
         builder.HasIndex(cp => cp.ClientId)
-            .HasDatabaseName("client_id_idx");
+            .HasDatabaseName("IX_Sms_ClientId");
 
         builder.Property(s => s.SmsId)
-            .HasColumnName("sms_id")
+            .HasColumnName("SmsId")
             .HasColumnType("bigint");
 
         builder.Property(s => s.PhoneNumber)
-            .HasColumnName("phone_number")
+            .HasColumnName("PhoneNumber")
             .HasColumnType("varchar(32)")
             .IsRequired();
 
         builder.Property(s => s.Message)
-            .HasColumnName("message")
-            .HasColumnType("text");
-
+            .HasColumnName("Message")
+            .HasColumnType("nvarchar(max)");
+        
         builder.Property(s => s.CreateDate)
-            .HasColumnType("timestamp")
+            .HasColumnType("datetime2")
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .HasColumnName("create_date")
+            .HasColumnName("CreateDate")
             .IsRequired();
 
         builder.Property(e => e.ClientId)
-            .HasColumnName("client_id");
+            .HasColumnName("ClientId");
 
         builder.HasOne(e => e.Client)
             .WithMany(c => c.Smses)
             .HasForeignKey(cp => cp.ClientId)
-            .HasConstraintName("sms_client_client_id_fk");
+            .HasConstraintName("FK_Sms_Client_ClientId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

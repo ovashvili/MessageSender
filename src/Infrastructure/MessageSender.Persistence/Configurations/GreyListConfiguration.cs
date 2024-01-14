@@ -7,40 +7,39 @@ public class GreyListConfiguration : IEntityTypeConfiguration<GreyList>
 {
     public void Configure(EntityTypeBuilder<GreyList> builder)
     {
-        builder.ToTable("greylist");
+        builder.ToTable("GreyList");
         builder.HasKey(g => g.ContactIdentifier)
-            .HasName("greylist_pk");
+            .HasName("PK_GreyList");
 
         builder.Property(g => g.ContactIdentifier)
-            .HasColumnName("contact_identifier")
+            .HasColumnName("ContactIdentifier")
             .HasColumnType("varchar(255)")
             .IsRequired();
 
         builder.Property(g => g.Status)
-            .HasColumnName("status")
+            .HasColumnName("Status")
             .HasColumnType("varchar(32)")
-            .HasComment(
-                $"Possible Values:\n{string.Join('\n', Enum.GetNames<ContactStatus>())}")
+            .HasComment($"Possible Values:\n{string.Join('\n', Enum.GetNames<ContactStatus>())}")
             .HasConversion(new EnumToStringConverter<ContactStatus>())
             .IsRequired();
 
         builder.Property(g => g.StatusNote)
-            .HasColumnName("status_note")
-            .HasColumnType("tinytext");
-
+            .HasColumnName("StatusNote")
+            .HasColumnType("nvarchar(511)"); 
+            
         builder.Property(g => g.IsActive)
-            .HasColumnName("is_active")
+            .HasColumnName("IsActive")
             .IsRequired();
 
         builder.Property(g => g.CreateDate)
-            .HasColumnName("create_date")
-            .HasColumnType("timestamp")
+            .HasColumnName("CreateDate")
+            .HasColumnType("datetime2")
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
             .IsRequired();
 
         builder.Property(g => g.ModifyDate)
-            .HasColumnName("modify_date")
-            .HasColumnType("timestamp")
+            .HasColumnName("ModifyDate")
+            .HasColumnType("datetime2")
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
             .IsRequired();
     }

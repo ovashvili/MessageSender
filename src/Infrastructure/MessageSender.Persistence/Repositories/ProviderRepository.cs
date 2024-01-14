@@ -2,20 +2,29 @@ using MessageSender.Domain.Contracts;
 
 namespace MessageSender.Persistence.Repositories;
 
-public class ProviderRepository : IProviderRepository
+public class ProviderRepository(AppDbContext dbContext) : IProviderRepository
 {
-    public Task<IEnumerable<Provider>> GetProvidersAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Provider>> GetProvidersAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.Providers
+            .AsNoTracking()
+            .Where(p => p.IsActive)
+            .ToListAsync(cancellationToken);
     }
 
-    public Task<Provider?> GetProviderAsync(string providerName, CancellationToken cancellationToken = default)
+    public async Task<Provider?> GetProviderAsync(string providerName, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.Providers
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Name == providerName && p.IsActive, cancellationToken);
     }
 
-    public Task<IEnumerable<CountryProvider>> GetCountryProvidersAsync(string alpha2Code, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<CountryProvider>> GetCountryProvidersAsync(string alpha2Code, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.CountryProviders
+            .AsNoTracking()
+            .Include(cp => cp.Provider)  // Include the related Provider entity
+            .Where(cp => cp.Alpha2Code == alpha2Code && cp.IsActive)
+            .ToListAsync(cancellationToken);
     }
 }

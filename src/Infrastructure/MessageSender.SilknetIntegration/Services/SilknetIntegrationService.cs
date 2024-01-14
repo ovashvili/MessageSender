@@ -38,9 +38,9 @@ public class SilknetIntegrationService : ISmsIntegrationService
             // var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
             if (_logger.IsEnabled(LogLevel.Information))
-                _logger.LogInformation("Sending sms...");
+                _logger.LogInformation("Sending sms via Silknet...");
             
-            return SmsProviderResult.Success("529");
+            return SmsProviderResult.Success("2");
         }
         catch (Exception ex)
         {

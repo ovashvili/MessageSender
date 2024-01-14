@@ -7,66 +7,65 @@ public class MessageDeliveryConfiguration : IEntityTypeConfiguration<MessageDeli
 {
     public void Configure(EntityTypeBuilder<MessageDelivery> builder)
     {
-        builder.ToTable("message_delivery");
+        builder.ToTable("MessageDelivery");
         builder.HasKey(md => md.MessageDeliveryId)
-            .HasName("message_delivery_pk");
+            .HasName("PK_MessageDelivery");
 
         builder.HasIndex(md => md.SmsId)
-            .HasDatabaseName("sms_id_idx");
+            .HasDatabaseName("IX_MessageDelivery_SmsId");
 
         builder.HasIndex(md => md.ProviderId)
-            .HasDatabaseName("provider_id_idx");
+            .HasDatabaseName("IX_MessageDelivery_ProviderId");
 
         builder.Property(md => md.MessageDeliveryId)
             .HasColumnType("bigint")
-            .HasColumnName("message_delivery_id");
+            .HasColumnName("MessageDeliveryId");
 
         builder.Property(md => md.Status)
-            .HasColumnName("status")
+            .HasColumnName("Status")
             .HasColumnType("varchar(32)")
-            .HasComment(
-                $"Possible Values:\n{string.Join('\n', Enum.GetNames<MessageDeliveryStatus>())}")
+            .HasComment($"Possible Values:\n{string.Join('\n', Enum.GetNames<MessageDeliveryStatus>())}")
             .HasConversion(new EnumToStringConverter<MessageDeliveryStatus>())
             .IsRequired();
 
         builder.Property(md => md.StatusNote)
-            .HasColumnName("status_note")
-            .HasColumnType("tinytext");
-
+            .HasColumnName("StatusNote")
+            .HasColumnType("nvarchar(511)"); 
+        
         builder.Property(md => md.ProviderMessageId)
-            .HasColumnName("provider_message_id")
+            .HasColumnName("ProviderMessageId")
             .HasColumnType("varchar(64)");
 
         builder.Property(md => md.CreateDate)
-            .HasColumnName("create_date")
-            .HasColumnType("timestamp")
+            .HasColumnName("CreateDate")
+            .HasColumnType("datetime2")
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
             .IsRequired();
 
         builder.Property(md => md.ModifyDate)
-            .HasColumnName("modify_date")
-            .HasColumnType("timestamp")
+            .HasColumnName("ModifyDate")
+            .HasColumnType("datetime2")
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
             .IsRequired();
 
         builder.Property(md => md.SmsId)
-            .HasColumnName("sms_id")
+            .HasColumnName("SmsId")
             .HasColumnType("bigint");
 
         builder.Property(md => md.ProviderId)
-            .HasColumnName("provider_id")
+            .HasColumnName("ProviderId")
             .HasColumnType("int");
 
         builder.HasOne(md => md.Sms)
             .WithMany(s => s.MessageDeliveries)
             .HasForeignKey(md => md.SmsId)
-            .HasConstraintName("message_delivery_sms_sms_id_fk")
+            .HasConstraintName("FK_MessageDelivery_Sms_SmsId")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(md => md.Provider)
             .WithMany(p => p.MessageDeliveries)
             .HasForeignKey(md => md.ProviderId)
-            .HasConstraintName("message_delivery_provider_provider_id_fk")
+            .HasConstraintName("FK_MessageDelivery_Provider_ProviderId")
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

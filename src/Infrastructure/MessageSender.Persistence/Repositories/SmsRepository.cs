@@ -2,15 +2,32 @@ using MessageSender.Domain.Contracts;
 
 namespace MessageSender.Persistence.Repositories;
 
-public class SmsRepository : ISmsRepository
+public class SmsRepository(AppDbContext dbContext) : ISmsRepository
 {
-    public Task<int> InsertSmsAsync(Guid clientId, string phoneNumber, CancellationToken cancellationToken = default)
+    public async Task<long> InsertSmsAsync(Guid clientId, string phoneNumber, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var sms = new Sms
+        {
+            ClientId = clientId,
+            PhoneNumber = phoneNumber,
+            CreateDate = DateTime.UtcNow
+        };
+
+        dbContext.Smses.Add(sms);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return sms.SmsId;
     }
 
-    public Task UpdateSmsContentAsync(int smsId, string content, CancellationToken cancellationToken = default)
+    public async Task UpdateSmsContentAsync(int smsId, string content, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var sms = await dbContext.Smses
+            .FirstOrDefaultAsync(s => s.SmsId == smsId, cancellationToken);
+
+        if (sms != null)
+        {
+            sms.Message = content;
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }

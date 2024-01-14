@@ -41,9 +41,9 @@ public class MagtiIntegrationService : ISmsIntegrationService
             // var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
             if (_logger.IsEnabled(LogLevel.Information))
-                _logger.LogInformation("Sending sms...");
+                _logger.LogInformation("Sending sms via Magti...");
             
-            return SmsProviderResult.Success("528");
+            return SmsProviderResult.Success("1");
             
         }
         catch (Exception ex)

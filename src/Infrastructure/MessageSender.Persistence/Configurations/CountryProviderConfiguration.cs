@@ -4,47 +4,47 @@ public class CountryProviderConfiguration : IEntityTypeConfiguration<CountryProv
 {
     public void Configure(EntityTypeBuilder<CountryProvider> builder)
     {
-        builder.ToTable("country_provider");
+        builder.ToTable("CountryProvider");
         builder.HasKey(cp => cp.CountryProviderId)
-            .HasName("country_provider_pk");
+            .HasName("PK_CountryProvider");
 
         builder.Property(cp => cp.CountryProviderId)
-            .HasColumnName("country_provider_id");
+            .HasColumnName("CountryProviderId");
 
         builder.Property(cp => cp.ProviderId)
-            .HasColumnName("provider_id")
+            .HasColumnName("ProviderId")
             .IsRequired();
 
         builder.Property(cp => cp.Alpha2Code)
-            .HasColumnName("alpha_2_code")
+            .HasColumnName("Alpha2Code")
             .IsRequired();
 
         builder.Property(p => p.Priority)
-            .HasColumnName("priority")
+            .HasColumnName("Priority")
             .HasColumnType("SMALLINT")
             .HasDefaultValueSql(short.MaxValue.ToString())
             .IsRequired();
 
         builder.Property(cp => cp.IsActive)
-            .HasColumnName("is_active")
+            .HasColumnName("IsActive")
             .IsRequired();
 
         builder.HasOne(cp => cp.Country)
             .WithMany(c => c.CountryProviders)
             .HasForeignKey(cp => cp.Alpha2Code)
-            .HasConstraintName("country_provider_country_alpha_2_code_fk")
+            .HasConstraintName("FK_CountryProvider_Country_Alpha2Code")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(cp => cp.Alpha2Code)
-            .HasDatabaseName("alpha_2_code_idx");
+            .HasDatabaseName("IX_CountryProvider_Alpha2Code");
 
         builder.HasOne(cp => cp.Provider)
             .WithMany(p => p.CountryProviders)
             .HasForeignKey(cp => cp.ProviderId)
-            .HasConstraintName("country_provider_provider_provider_id_fk")
+            .HasConstraintName("FK_CountryProvider_Provider_ProviderId")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(cp => cp.ProviderId)
-            .HasDatabaseName("provider_id_idx");
+            .HasDatabaseName("IX_CountryProvider_ProviderId");
     }
 }

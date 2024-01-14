@@ -1,7 +1,7 @@
 using MessageSender.Api.Filters;
 using MessageSender.Application.Common.Models;
+using MessageSender.Application.Sms.Contracts;
 using MessageSender.Application.Sms.Models;
-using MessageSender.Application.Sms.Services;
 using MessageSender.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +28,7 @@ public class SmsController : ControllerBase
     /// Sends an SMS.
     /// </summary>
     /// <param name="sendSmsDto">A request data for sending the SMS.</param>
-    /// <param name="clientId">TThe UUID of the client requesting the SMS transmission.</param>
+    /// <param name="clientId">The UUID of the client requesting the SMS transmission.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>A result object containing the ID of the sent message or an error message if the operation failed.</returns>
     [HttpPost("send")]

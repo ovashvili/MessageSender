@@ -1,24 +1,53 @@
 using MessageSender.Domain.Contracts;
 using MessageSender.Domain.Enums;
+using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
-public class MessageDeliveryRepository : IMessageDeliveryRepository
+public class MessageDeliveryRepository(AppDbContext dbContext) : IMessageDeliveryRepository
 {
-    public Task<int?> GetSmsStatusAsync(long smsId, CancellationToken cancellationToken = default)
+    public async Task<int?> GetSmsStatusAsync(long smsId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.MessageDelivery
+            .AsNoTracking()
+            .Where(md => md.SmsId == smsId)
+            .Select(md => (int?)md.Status)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public Task<long> InsertMessageDeliveryStatusAsync(MessageDeliveryStatus status, long? smsId = null, int? providerId = null,
+    public async Task<long> InsertMessageDeliveryStatusAsync(MessageDeliveryStatus status, long? smsId = null, int? providerId = null,
         string? statusNote = null, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var messageDelivery = new MessageDelivery
+        {
+            Status = status,
+            SmsId = smsId,
+            ProviderId = providerId,
+            StatusNote = statusNote,
+            CreateDate = DateTime.UtcNow, //  
+            ModifyDate = DateTime.UtcNow 
+        };
+
+        dbContext.MessageDelivery.Add(messageDelivery);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return messageDelivery.MessageDeliveryId;
     }
 
-    public Task UpdateMessageDeliveryStatusAsync(long messageDeliveryId, MessageDeliveryStatus status, string? providerMessageId,
+    public async Task UpdateMessageDeliveryStatusAsync(long messageDeliveryId, MessageDeliveryStatus status, string? providerMessageId,
         string? statusNote = null, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var messageDelivery = await dbContext.MessageDelivery
+            .FirstOrDefaultAsync(md => md.MessageDeliveryId == messageDeliveryId, cancellationToken);
+
+        if (messageDelivery != null)
+        {
+            messageDelivery.Status = status;
+            messageDelivery.ProviderMessageId = providerMessageId;
+            messageDelivery.StatusNote = statusNote;
+            messageDelivery.ModifyDate = DateTime.UtcNow;
+
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }
