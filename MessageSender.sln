@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.SilknetIntegr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.PelekaIntegration", "src\Infrastructure\MessageSender.PelekaIntegration\MessageSender.PelekaIntegration.csproj", "{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSender.NexmoIntegration", "src\Infrastructure\MessageSender.NexmoIntegration\MessageSender.NexmoIntegration.csproj", "{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{102245F8-62A1-4661-9EAB-5F1F3D1FB0EB} = {E2A8E25F-DB99-4E77-89BD-50E147430E74}
@@ -78,5 +84,6 @@ Global
 		{A132A180-C424-42A0-8A0D-0373A86C642A} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 		{BB0E06B2-7E56-4522-B082-AFC02AE06590} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 		{D2CA95D3-B0B4-4EFB-B993-29CECE3D526A} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
+		{A65A649D-2D4A-4C8D-91EF-619FAC96E3B5} = {ADB255F7-EE98-4115-BCE1-D2099D72BCB0}
 	EndGlobalSection
 EndGlobal

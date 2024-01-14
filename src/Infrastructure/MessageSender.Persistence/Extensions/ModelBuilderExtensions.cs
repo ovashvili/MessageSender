@@ -13,6 +13,13 @@ public static class ModelBuilderExtensions
                 Secret = Guid.NewGuid(),
                 Config = "{\"SmsFrom\": \"OTP\", \"field2\": \"value2\"}",
                 IsActive = true
+            },
+            new Client
+            {
+                ClientId = Guid.NewGuid(),
+                Secret = Guid.NewGuid(),
+                Config = "{\"field1\": \"value1\", \"field2\": \"value2\"}",
+                IsActive = false
             }
         );
         
@@ -53,6 +60,15 @@ public static class ModelBuilderExtensions
                 Config = "{\"provider-specific-field\": \"value3\"}",
                 IsGlobal = false,
                 IsActive = true
+            },
+            new Provider
+            {
+                ProviderId = 4,
+                Name = "Nexmo",
+                Priority = 1,
+                Config = "{\"provider-specific-field\": \"value4\"}",
+                IsGlobal = true,
+                IsActive = true
             }
         );
         
@@ -67,6 +83,12 @@ public static class ModelBuilderExtensions
             {
                 Alpha2Code = "AM",
                 DialCode = 374,
+                IsActive = true
+            },
+            new Country
+            {
+                Alpha2Code = "US",
+                DialCode = 1,
                 IsActive = true
             }
         );
@@ -93,6 +115,14 @@ public static class ModelBuilderExtensions
                 CountryProviderId = 3,
                 ProviderId = 3,
                 Alpha2Code = "AM",
+                Priority = 1,
+                IsActive = true
+            },
+            new CountryProvider
+            {
+                CountryProviderId = 4,
+                ProviderId = 4,
+                Alpha2Code = "US",
                 Priority = 1,
                 IsActive = true
             }

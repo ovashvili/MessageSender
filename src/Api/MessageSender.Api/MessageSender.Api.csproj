@@ -11,6 +11,7 @@
       <ProjectReference Include="..\..\Application\MessageSender.Application\MessageSender.Application.csproj" />
       <ProjectReference Include="..\..\Core\MessageSender.Domain\MessageSender.Domain.csproj" />
       <ProjectReference Include="..\..\Infrastructure\MessageSender.MagtiIntegration\MessageSender.MagtiIntegration.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\MessageSender.NexmoIntegration\MessageSender.NexmoIntegration.csproj" />
       <ProjectReference Include="..\..\Infrastructure\MessageSender.PelekaIntegration\MessageSender.PelekaIntegration.csproj" />
       <ProjectReference Include="..\..\Infrastructure\MessageSender.SilknetIntegration\MessageSender.SilknetIntegration.csproj" />
     </ItemGroup>

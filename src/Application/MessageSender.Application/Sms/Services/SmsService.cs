@@ -137,9 +137,9 @@ public class SmsService : ISmsService
             return null;
 
         var messageDeliveryId = await _smsServiceRepositoryFacade.InsertMessageDeliveryAsync(smsId,
-            MessageDeliveryStatus.Fail,null,"phone number blacklisted",cancellationToken);
+            MessageDeliveryStatus.Fail,null,"Phone number blacklisted",cancellationToken);
         
-        return new Result<long>(StatusCodes.GenericFailedError, "user is blacklisted", messageDeliveryId);
+        return new Result<long>(StatusCodes.GenericFailedError, "User is blacklisted", messageDeliveryId);
     }
 
     private async Task<Result<long>?> CheckCountryAsync(long smsId, string countryCode, CancellationToken cancellationToken)
@@ -150,9 +150,9 @@ public class SmsService : ISmsService
             return null;
 
         var messageDeliveryId = await _smsServiceRepositoryFacade.InsertMessageDeliveryAsync(smsId,
-            MessageDeliveryStatus.Fail,null,"country blocked",cancellationToken);
+            MessageDeliveryStatus.Fail,null,"Country blocked",cancellationToken);
         
-        return new Result<long>(StatusCodes.NotFound, "country blocked", messageDeliveryId);
+        return new Result<long>(StatusCodes.NotFound, "Country blocked", messageDeliveryId);
     }
 
     private async Task<Result<long>> TrySendSmsAsync(long smsId, string from, int providerId, string number, string content, CancellationToken cancellationToken = default)
@@ -160,7 +160,7 @@ public class SmsService : ISmsService
         var providerIntegration = _smsIntegrationFactory.Create(providerId);
 
         if (providerIntegration is null)
-            return new Result<long>(StatusCodes.NotFound, "provider not found");
+            return new Result<long>(StatusCodes.NotFound, "Provider not found");
 
         var messageDeliveryId = await _smsServiceRepositoryFacade.InsertMessageDeliveryAsync(smsId,
             MessageDeliveryStatus.SendingToProvider, providerIntegration.ProviderId, null, cancellationToken);

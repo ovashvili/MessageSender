@@ -6,6 +6,7 @@ using MessageSender.Api.Filters;
 using MessageSender.Application.Sms.Extensions;
 using MessageSender.Application.Sms.Models;
 using MessageSender.MagtiIntegration.Extensions;
+using MessageSender.NexmoIntegration.Extensions;
 using MessageSender.PelekaIntegration.Extensions;
 using MessageSender.Persistence.Context;
 using MessageSender.Persistence.Extensions;
@@ -28,9 +29,7 @@ try
             new JsonStringEnumConverter()));
 
     builder.Logging.ClearProviders();
-
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-    
     builder.Host.UseNLog();
     
     builder.Services.AddApiVersioning(options =>
@@ -53,11 +52,13 @@ try
     builder.Services.AddFluentValidationAutoValidation();
     builder.Services.AddValidatorsFromAssemblyContaining<SendSmsRequestValidator>();
     builder.Services.AddHttpClient();
+    
     builder.AddSmsServices();
     builder.AddRepositoryServices();
     builder.AddMagtiIntegration();
     builder.AddSilknetIntegration();
     builder.AddPelekaIntegration();
+    builder.AddNexmoIntegration();
     builder.AddSwaggerWithApiKeySecurity();
 
     var app = builder.Build();
