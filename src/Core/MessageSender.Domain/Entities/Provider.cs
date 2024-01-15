@@ -11,5 +11,4 @@ public class Provider
 
     public virtual ICollection<MessageDelivery> MessageDeliveries { get; set; } = new List<MessageDelivery>();
     public virtual ICollection<CountryProvider> CountryProviders { get; set; } = new List<CountryProvider>();
-
 }

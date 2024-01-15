@@ -23,7 +23,7 @@ public class ProviderRepository(AppDbContext dbContext) : IProviderRepository
     {
         return await dbContext.CountryProviders
             .AsNoTracking()
-            .Include(cp => cp.Provider)  // Include the related Provider entity
+            .Include(cp => cp.Provider) 
             .Where(cp => cp.Alpha2Code == alpha2Code && cp.IsActive)
             .ToListAsync(cancellationToken);
     }

@@ -1,5 +1,3 @@
-using MessageSender.Domain.Entities;
-
 namespace MessageSender.Domain.Contracts;
 
 public interface ISmsRepository

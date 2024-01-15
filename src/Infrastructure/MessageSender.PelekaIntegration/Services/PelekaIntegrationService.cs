@@ -6,8 +6,6 @@ using System.Text.Json;
 using MessageSender.IntegrationsCommon.Contracts;
 using MessageSender.IntegrationsCommon.ProviderResults;
 using MessageSender.PelekaIntegration.Configurations;
-using MessageSender.PelekaIntegration.Enums;
-using MessageSender.PelekaIntegration.Extensions;
 
 namespace MessageSender.PelekaIntegration.Services;
 

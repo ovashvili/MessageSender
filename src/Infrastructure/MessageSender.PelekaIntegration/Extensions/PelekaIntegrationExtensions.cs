@@ -1,9 +1,7 @@
 using MessageSender.IntegrationsCommon.Contracts;
 using Microsoft.AspNetCore.Builder;
-using MessageSender.Domain.Contracts;
 using MessageSender.PelekaIntegration.Configurations;
 using Microsoft.Extensions.DependencyInjection;
-using MessageSender.PelekaIntegration.Configurations;
 using MessageSender.PelekaIntegration.Services;
 
 namespace MessageSender.PelekaIntegration.Extensions;

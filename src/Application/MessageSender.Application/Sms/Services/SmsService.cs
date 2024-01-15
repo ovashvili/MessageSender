@@ -12,16 +12,19 @@ public class SmsService : ISmsService
 {
     private readonly ISmsServiceRepositoryFacade _smsServiceRepositoryFacade;
     private readonly ISmsIntegrationFactory _smsIntegrationFactory;
+    private readonly IPhoneNumberHelperService _phoneNumberHelperService;
     private readonly IFireForgetSmsRepositoryHandler _fireForgetSmsRepositoryHandler;
     private readonly ILogger<SmsService> _logger;
 
     public SmsService(ISmsServiceRepositoryFacade smsServiceRepositoryFacade,
         ISmsIntegrationFactory smsIntegrationFactory,
+        IPhoneNumberHelperService phoneNumberHelperService,
         IFireForgetSmsRepositoryHandler fireForgetSmsRepositoryHandler,
         ILogger<SmsService> logger)
     {
         _smsServiceRepositoryFacade = smsServiceRepositoryFacade;
         _smsIntegrationFactory = smsIntegrationFactory;
+        _phoneNumberHelperService = phoneNumberHelperService;
         _fireForgetSmsRepositoryHandler = fireForgetSmsRepositoryHandler;
         _logger = logger;
     }
@@ -68,8 +71,10 @@ public class SmsService : ISmsService
         if (greyListCheckResult != null) return greyListCheckResult;
 
         var countryCheckResult = await CheckCountryAsync(smsId, countryCode, cancellationToken);
-        if (countryCheckResult != null) return countryCheckResult;
+        if (countryCheckResult.result != null) return countryCheckResult.result;
 
+        number = _phoneNumberHelperService.FormatPhoneNumber(countryCheckResult.dialCode, number);
+        
         // Check forced provider
         if (provider is not null)
         {
@@ -94,7 +99,7 @@ public class SmsService : ISmsService
 
         // Exclude country providers from the global providers
         var excludedGlobalProviderIds = globalProviders
-            .Where(gp => !countryProviderIds.Any(cp => cp == gp.ProviderId))
+            .Where(gp => countryProviderIds.All(cp => cp != gp.ProviderId))
             .Select(gp => gp.ProviderId);
 
         var globalProvidersResult = await TrySendWithProvidersAsync(
@@ -142,17 +147,21 @@ public class SmsService : ISmsService
         return new Result<long>(StatusCodes.GenericFailedError, "User is blacklisted", messageDeliveryId);
     }
 
-    private async Task<Result<long>?> CheckCountryAsync(long smsId, string countryCode, CancellationToken cancellationToken)
+    private async Task<(Result<long>? result, short dialCode)> CheckCountryAsync(long smsId, string countryCode, CancellationToken cancellationToken)
     {
         var country = await _smsServiceRepositoryFacade.GetCountryAsync(countryCode, cancellationToken);
 
         if (country is not null)
-            return null;
+        {
+            return (null, country.DialCode);
+        }
 
         var messageDeliveryId = await _smsServiceRepositoryFacade.InsertMessageDeliveryAsync(smsId,
             MessageDeliveryStatus.Fail,null,"Country blocked",cancellationToken);
-        
-        return new Result<long>(StatusCodes.NotFound, "Country blocked", messageDeliveryId);
+
+        var result = new Result<long>(StatusCodes.NotFound, "Country blocked", messageDeliveryId);
+
+        return (result, default);
     }
 
     private async Task<Result<long>> TrySendSmsAsync(long smsId, string from, int providerId, string number, string content, CancellationToken cancellationToken = default)

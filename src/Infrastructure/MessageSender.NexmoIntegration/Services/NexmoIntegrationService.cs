@@ -1,11 +1,8 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Text;
-using System.Text.Json;
 using MessageSender.IntegrationsCommon.Contracts;
 using MessageSender.IntegrationsCommon.ProviderResults;
 using MessageSender.NexmoIntegration.Configurations;
-using MessageSender.NexmoIntegration.Models;
 
 namespace MessageSender.NexmoIntegration.Services;
 

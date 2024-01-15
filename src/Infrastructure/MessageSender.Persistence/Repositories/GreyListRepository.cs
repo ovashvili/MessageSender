@@ -1,5 +1,4 @@
 using MessageSender.Domain.Contracts;
-using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
@@ -9,6 +8,7 @@ public class GreyListRepository(AppDbContext dbContext) : IGreyListRepository
     {
         return await dbContext.GreyList
             .AsNoTracking()
+            .Where(c => c.IsActive)
             .ToListAsync(cancellationToken);
     }
 
@@ -16,6 +16,6 @@ public class GreyListRepository(AppDbContext dbContext) : IGreyListRepository
     {
         return await dbContext.GreyList
             .AsNoTracking()
-            .FirstOrDefaultAsync(g => g.ContactIdentifier == contactIdentifier, cancellationToken);
+            .FirstOrDefaultAsync(g => g.ContactIdentifier == contactIdentifier && g.IsActive, cancellationToken);
     }
 }

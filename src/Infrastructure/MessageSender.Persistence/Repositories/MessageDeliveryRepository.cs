@@ -1,6 +1,5 @@
 using MessageSender.Domain.Contracts;
 using MessageSender.Domain.Enums;
-using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
@@ -24,8 +23,6 @@ public class MessageDeliveryRepository(AppDbContext dbContext) : IMessageDeliver
             SmsId = smsId,
             ProviderId = providerId,
             StatusNote = statusNote,
-            CreateDate = DateTime.UtcNow, //  
-            ModifyDate = DateTime.UtcNow 
         };
 
         dbContext.MessageDelivery.Add(messageDelivery);
@@ -45,7 +42,6 @@ public class MessageDeliveryRepository(AppDbContext dbContext) : IMessageDeliver
             messageDelivery.Status = status;
             messageDelivery.ProviderMessageId = providerMessageId;
             messageDelivery.StatusNote = statusNote;
-            messageDelivery.ModifyDate = DateTime.UtcNow;
 
             await dbContext.SaveChangesAsync(cancellationToken);
         }

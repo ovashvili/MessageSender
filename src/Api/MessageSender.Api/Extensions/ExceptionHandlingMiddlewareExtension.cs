@@ -1,5 +1,4 @@
 using MessageSender.Application.Common.Middlewares;
-using Microsoft.AspNetCore.Builder;
 
 namespace MessageSender.Api.Extensions;
 

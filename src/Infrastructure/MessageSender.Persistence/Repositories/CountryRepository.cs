@@ -1,5 +1,4 @@
 using MessageSender.Domain.Contracts;
-using MessageSender.Persistence.Context;
 
 namespace MessageSender.Persistence.Repositories;
 
